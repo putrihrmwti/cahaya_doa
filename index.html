@@ -659,7 +659,7 @@ button {
     -webkit-overflow-scrolling: touch;
   }
 
-  .page-content::webkit-scrolbar {
+  .page-content::-webkit-scrollbar {
     display: none;
   }
 
@@ -814,19 +814,19 @@ button {
       <button class="see-all" id="exploreButton">Lihat semua ↗</button>
     </div>
     <div class="category-grid">
-      <button class="category-card" data-name="Doa Setelah Salat">
+      <button class="category-card" data-filter="Doa Setelah Salat">
         <div class="category-icon">☪</div>
-        <div><div class="category-name">Setelah Salat</div><div class="category-count">Doa & id="zikir"</div></div>
+        <div><div class="category-name">Setelah Salat</div><div class="category-count">Doa &amp; zikir</div></div>
       </button>
-      <button class="category-card" data-name="Doa Sebelum Tidur">
+      <button class="category-card" data-filter="Tidur">
         <div class="category-icon">☾</div>
         <div><div class="category-name">Sebelum Tidur</div><div class="category-count">Doa istirahat</div></div>
       </button>
-      <button class="category-card" data-name="Doa Aktivitas Harian">
+      <button class="category-card" data-filter="Aktivitas Harian">
         <div class="category-icon">✿</div>
         <div><div class="category-name">Doa Harian</div><div class="category-count">Dalam aktivitas</div></div>
       </button>
-      <button class="category-card" data-name="Doa untuk Keluarga">
+      <button class="category-card" data-filter="Keluarga">
         <div class="category-icon">♡</div>
         <div><div class="category-name">Doa Keluarga</div><div class="category-count">Untuk orang tercinta</div></div>
       </button>
@@ -871,30 +871,59 @@ document.getElementById("today").textContent =
 
 // Favorit
 const favoriteButton = document.getElementById("favoriteButton");
-favoriteButton.addEventListener("click", () => {
-  const active = favoriteButton.classList.toggle("active");
+
+function renderFavorite(active) {
+  favoriteButton.classList.toggle("active", active);
   favoriteButton.textContent = active ? "♥" : "♡";
-  showNotice(active ? "Doa ditambahkan ke favorit" : "Doa dihapus dari favorit");
+}
+
+let isFavorite = false;
+try {
+  isFavorite = localStorage.getItem("cahayaFavorit") === "1";
+} catch (error) {}
+renderFavorite(isFavorite);
+
+favoriteButton.addEventListener("click", () => {
+  isFavorite = !isFavorite;
+  renderFavorite(isFavorite);
+  try {
+    localStorage.setItem("cahayaFavorit", isFavorite ? "1" : "0");
+  } catch (error) {}
+  showNotice(isFavorite ? "Doa ditambahkan ke favorit" : "Doa dihapus dari favorit");
 });
 
 // Bacakan doa
-document.getElementById("playButton").addEventListener("click", () => {
+const playButton = document.getElementById("playButton");
+
+function resetPlayButton() {
+  playButton.textContent = "▶";
+  playButton.setAttribute("aria-label", "Bacakan doa");
+}
+
+playButton.addEventListener("click", () => {
   if (!("speechSynthesis" in window)) {
     showNotice("Fitur suara belum tersedia di browser ini");
     return;
   }
   if (window.speechSynthesis.speaking) {
     window.speechSynthesis.cancel();
+    resetPlayButton();
     showNotice("Bacaan dihentikan");
     return;
   }
-  const utterance = new SpeechSynthesisUtterance(
-    "Rabbi zidnii ilma. Ya Tuhanku, tambahkanlah ilmu kepadaku."
-  );
+
+  const translation = document.querySelector(".daily-card .translation");
+  const text = (translation.innerText || translation.textContent).trim();
+  const utterance = new SpeechSynthesisUtterance(text);
   utterance.lang = "id-ID";
   utterance.rate = 0.85;
+  utterance.onend = resetPlayButton;
+  utterance.onerror = resetPlayButton;
   window.speechSynthesis.speak(utterance);
-  showNotice("Membacakan arti doa");
+
+  playButton.textContent = "⏸";
+  playButton.setAttribute("aria-label", "Hentikan bacaan");
+  showNotice("Membacakan bacaan dan arti doa");
 });
 
 // Bagikan doa
@@ -984,6 +1013,27 @@ const explorePrayers = [
     arabic: "بِسْمِ اللَّهِ تَوَكَّلْتُ عَلَى اللَّهِ",
     latin: "Bismillaahi tawakkaltu 'alallaah.",
     meaning: "Dengan nama Allah, aku bertawakal kepada Allah."
+  },
+  {
+    title: "Doa untuk Orang Tua",
+    category: "Keluarga",
+    arabic: "رَبِّ ارْحَمْهُمَا كَمَا رَبَّيَانِي صَغِيرًا",
+    latin: "Robbii irhumaa kamaa rabbayaanii shaghiroo.",
+    meaning: "Ya Tuhanku, rahmatilah keduanya sebagaimana mereka mendidiku ketika kecil."
+  },
+  {
+    title: "Doa Keluarga Sakinah",
+    category: "Keluarga",
+    arabic: "رَبَّنَا هَبْ لَنَا مِنْ أَزْوَاجِنَا وَذُرِّيَّاتِنَا قُرَّةَ أَعْيُنٍ وَاجْعَلْنَا لِلْمُتَّقِينَ إِمَامًا",
+    latin: "Robbaanaa hab lanaa min azwaajinaa wa dzurriyyaatinaa qurrota a'yuunin waj'alnaa lil muttaqiina imaamaa.",
+    meaning: "Ya Tuhan kami, anugerahkanlah kepada kami pasangan dan keturunan yang menjadi penyejuk mata, dan jadikanlah kami imam bagi orang-orang yang bertakwa."
+  },
+  {
+    title: "Doa untuk Anak",
+    category: "Keluarga",
+    arabic: "اللَّهُمَّ اجْعَلْهُ صَالِحًا وَارْزُقْهُ التَّقْوَى",
+    latin: "Allaahummaj'alhu shaalihan warzuqut taqwa.",
+    meaning: "Ya Allah, jadikanlah dia anak yang saleh dan berilah dia takwa."
   }
 ];
 
@@ -1195,7 +1245,7 @@ function openProfil() {
         bioTampil.textContent = bio ||
             "Terus belajar dan mendekatkan diri kepada Allah.";
 
-        alert("Profil berhasil disimpan!");
+        showNotice("Profil berhasil disimpan!");
     };
 
     document.getElementById("profilBack").onclick = function () {
@@ -1207,6 +1257,9 @@ function openProfil() {
 function setupNavigation() {
   document.querySelectorAll(".nav-item").forEach(button => {
     button.addEventListener("click", () => {
+      if ("speechSynthesis" in window) window.speechSynthesis.cancel();
+      resetPlayButton();
+
       const page = button.dataset.page;
       if (page === "Home") {
         location.reload();
@@ -1232,14 +1285,13 @@ function renderExplore() {
   );
 
   document.getElementById("exploreList").innerHTML = filtered.map((prayer, index) => `
-    <article class="prayer" style="cursor:pointer" data-prayer-index="${explorePrayers.indexOf(prayer)}">
+    <article class="prayer">
       <div class="prayer-top">
         <div class="number">${index + 1}</div>
         <div>
           <h3>${prayer.title}</h3>
           <div class="tag">${prayer.category}</div>
         </div>
-        <span style="margin-left:auto;color:#788b3c">›</span>
       </div>
       <div class="arabic" lang="ar" dir="rtl">${prayer.arabic}</div>
       <div class="latin">${prayer.latin}</div>
@@ -1249,18 +1301,6 @@ function renderExplore() {
 
   document.getElementById("noResults").style.display =
     filtered.length ? "none" : "block";
-
-  document.querySelectorAll("[data-prayer-index]").forEach(card => {
-    card.addEventListener("click", () => {
-      const prayer = explorePrayers[Number(card.dataset.prayerIndex)];
-      alert(
-        prayer.title + "\n\n" +
-        prayer.arabic + "\n\n" +
-        prayer.latin + "\n\n" +
-        "Artinya: " + prayer.meaning
-      );
-    });
-  });
 }
 
 function openExplore() {
@@ -1530,22 +1570,10 @@ document.getElementById("exploreButton").addEventListener("click", openExplore);
 
 document.querySelectorAll(".category-card").forEach(button => {
   button.addEventListener("click", () => {
-    const kategori = button.dataset.name;
-
     openExplore();
 
     const search = document.getElementById("exploreSearch");
-
-    if (kategori === "Doa Setelah Salat") {
-      search.value = "Doa & zikir setelah salat";
-    } else if (kategori === "Doa Sebelum Tidur") {
-      search.value = "Doa Sebelum Tidur";
-    } else if (kategori === "Doa Aktivitas Harian") {
-      search.value = "Doa Aktivitas Harian";
-    } else if (kategori === "Doa Untuk Keluarga") {
-      search.value = "Doa Untuk Keluarga";
-    }
-
+    search.value = button.dataset.filter || "";
     renderExplore();
   });
 });
