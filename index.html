@@ -5,6 +5,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#eef4ec">
 <title>Cahaya Doa</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 
 <style>
 * {
@@ -21,13 +24,28 @@
   --gold: #a8c4a0;
   --text: #5b3a50;
   --muted: #9a8296;
+  --card: #ffffff;
+  --stroke: #d5e3d1;
+  --soft: #e3efe0;
+  --plum-soft: #efe6ec;
 }
 
 body {
-  background: #d8e5d4;
+  background:
+    radial-gradient(1200px 500px at 50% -10%, #e6efe2 0%, transparent 60%),
+    radial-gradient(900px 400px at 110% 110%, #e9e0e6 0%, transparent 55%),
+    #d8e5d4;
   color: var(--text);
-  font-family: "Segoe UI", Arial, sans-serif;
+  font-family: "Plus Jakarta Sans", "Segoe UI", Arial, sans-serif;
   min-height: 100vh;
+}
+
+.font-serif {
+  font-family: "Cormorant Garamond", Georgia, serif;
+}
+
+.arabic, [lang="ar"] {
+  font-family: "Amiri", "Traditional Arabic", Georgia, serif;
 }
 
 button {
@@ -41,7 +59,10 @@ button {
   max-width: 440px;
   height: 100dvh;
   margin: 0 auto;
-  background: var(--cream);
+  background:
+    radial-gradient(600px 260px at 100% 0%, #e9e0e655 0%, transparent 70%),
+    radial-gradient(500px 240px at 0% 18%, #dfeadcaa 0%, transparent 70%),
+    var(--cream);
   position: relative;
   padding-bottom: 95px;
   overflow: hidden;
@@ -58,65 +79,84 @@ button {
 .brand {
   display: flex;
   align-items: center;
-  gap: 11px;
+  gap: 12px;
 }
 
 .logo {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
+  width: 44px;
+  height: 44px;
+  border-radius: 16px;
   display: grid;
   place-items: center;
-  background: #fff;
-  border: 1px solid #d5e3d1;
-  color: var(--green);
-  font-size: 21px;
+  background: linear-gradient(145deg, #5b3a50, #7d5a6e);
+  color: #f3eaf0;
+  font-size: 22px;
+  box-shadow: 0 6px 18px #5b3a5033, inset 0 1px 0 #ffffff30;
 }
 
 .brand-name {
-  font-family: Georgia, serif;
-  font-size: 18px;
-  font-weight: 500;
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-size: 22px;
+  font-weight: 600;
   letter-spacing: -.3px;
   color: #5b3a50;
 }
 
 .brand-subtitle {
   color: var(--muted);
-  font-size: 9px;
+  font-size: 8.5px;
   margin-top: 2px;
-  letter-spacing: 2px;
+  letter-spacing: 2.4px;
+  font-weight: 500;
 }
 
 .profile {
-  width: 40px;
-  height: 40px;
+  width: 42px;
+  height: 42px;
   border-radius: 50%;
   display: grid;
   place-items: center;
   background: #fff;
-  border: 1px solid #d5e3d1;
+  border: 1px solid var(--stroke);
   color: var(--green);
   font-size: 18px;
+  box-shadow: 0 3px 12px #5b3a500a;
+  transition: .2s;
+}
+
+.profile:active {
+  transform: scale(.93);
 }
 
 .greeting {
-  padding: 14px 24px 22px;
+  padding: 16px 24px 20px;
+  position: relative;
 }
 
 .date {
-  font-size: 10px;
-  letter-spacing: 2px;
-  color: #9a8296;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 9.5px;
+  letter-spacing: 2.4px;
+  color: var(--olive);
   text-transform: uppercase;
-  margin-bottom: 10px;
+  margin-bottom: 12px;
+  font-weight: 600;
+}
+
+.date::before {
+  content: "";
+  width: 18px;
+  height: 1px;
+  background: var(--gold);
 }
 
 .greeting h1 {
-  font-family: Georgia, serif;
-  font-size: 26px;
-  font-weight: 400;
-  line-height: 1.35;
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-size: 30px;
+  font-weight: 500;
+  line-height: 1.25;
   letter-spacing: -.5px;
   color: #5b3a50;
 }
@@ -127,44 +167,50 @@ button {
 }
 
 .greeting p {
-  margin-top: 8px;
+  margin-top: 9px;
   color: #9a8296;
   font-size: 12px;
-  line-height: 1.6;
+  line-height: 1.7;
+  font-weight: 300;
 }
 
-/* KARTU DOA HARIAN — minimal kalem */
+/* KARTU DOA HARIAN — hero */
 .daily-card {
   position: relative;
-  margin: 0 20px 28px;
-  border-radius: 22px;
-  padding: 24px 22px 20px;
+  margin: 2px 20px 30px;
+  border-radius: 26px;
+  padding: 26px 22px 20px;
   color: var(--text);
-  background: #fff;
+  background:
+    radial-gradient(220px 140px at 110% -10%, #5b3a5014 0%, transparent 70%),
+    radial-gradient(200px 140px at -10% 110%, #a8c4a030 0%, transparent 70%),
+    linear-gradient(165deg, #ffffff 0%, #f6faf4 100%);
   border: 1px solid #d5e3d1;
-  box-shadow: 0 6px 24px #5b3a5008;
+  box-shadow: 0 10px 32px #5b3a5012, 0 1px 0 #ffffffaa inset;
+  overflow: hidden;
 }
 
 .daily-card::before {
   content: "";
   position: absolute;
   top: 0;
-  left: 22px;
-  right: 22px;
-  height: 1px;
-  background: linear-gradient(90deg, transparent, #c9dccb, transparent);
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #7d5a6e, #a8c4a0, #7d5a6e);
+  opacity: .7;
 }
 
 .daily-card::after {
-  content: "";
+  content: "﷽";
   position: absolute;
-  width: 130px;
-  height: 130px;
-  border: 1px solid #5b3a500a;
-  border-radius: 50%;
-  top: -40px;
-  right: -45px;
+  right: -12px;
+  bottom: -18px;
+  font-size: 90px;
+  font-family: "Amiri", serif;
+  color: #5b3a500a;
   pointer-events: none;
+  line-height: 1;
 }
 
 .card-top {
@@ -176,10 +222,11 @@ button {
 }
 
 .card-label {
-  font-size: 9px;
-  letter-spacing: 2px;
-  color: #9a8296;
+  font-size: 8.5px;
+  letter-spacing: 2.2px;
+  color: #7d5a6e;
   text-transform: uppercase;
+  font-weight: 600;
 }
 
 .card-date {
@@ -187,45 +234,48 @@ button {
   letter-spacing: .5px;
   color: #7d5a6e;
   background: #e3efe0;
-  padding: 6px 11px;
+  padding: 6px 12px;
   border-radius: 20px;
+  font-weight: 500;
 }
 
 .card-heading {
-  font-family: Georgia, serif;
-  font-size: 21px;
-  font-weight: 400;
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-size: 25px;
+  font-weight: 600;
   margin-top: 18px;
   position: relative;
   z-index: 1;
-  line-height: 1.4;
+  line-height: 1.3;
   color: #5b3a50;
 }
 
 .daily-card .arabic {
-  font-size: 27px;
+  font-family: "Amiri", serif;
+  font-size: 32px;
   text-align: center;
-  line-height: 2.1;
-  margin: 18px 0 12px;
+  line-height: 2.2;
+  margin: 20px 0 14px;
   position: relative;
   z-index: 1;
-  color: #5b3a50;
+  color: #47293d;
 }
 
 .translation {
   text-align: center;
   color: #8a7290;
-  font-size: 11.5px;
-  line-height: 1.8;
+  font-size: 12px;
+  line-height: 1.85;
   position: relative;
   z-index: 1;
   padding: 0 4px;
+  font-weight: 300;
 }
 
 .card-divider {
   height: 1px;
-  background: #c9dccb;
-  margin: 20px 0 14px;
+  background: linear-gradient(90deg, transparent, #d5e3d1, transparent);
+  margin: 22px 0 14px;
   position: relative;
   z-index: 1;
 }
@@ -251,26 +301,28 @@ button {
 }
 
 .action {
-  width: 34px;
-  height: 34px;
+  width: 38px;
+  height: 38px;
   border-radius: 50%;
   border: 1px solid #d5e3d1;
-  background: #e3efe0;
+  background: #fff;
   color: var(--green);
   display: grid;
   place-items: center;
-  font-size: 14px;
-  transition: .15s;
+  font-size: 15px;
+  transition: .18s;
+  box-shadow: 0 2px 8px #5b3a500a;
 }
 
 .action:active {
-  transform: scale(.9);
+  transform: scale(.88);
 }
 
 .action.favorite.active {
-  background: var(--green);
-  border-color: var(--green);
+  background: linear-gradient(145deg, #5b3a50, #7d5a6e);
+  border-color: transparent;
   color: #fff;
+  box-shadow: 0 4px 14px #5b3a5040;
 }
 
 .section {
@@ -286,9 +338,9 @@ button {
 }
 
 .section-heading h2 {
-  font-family: Georgia, serif;
-  font-size: 18px;
-  font-weight: 400;
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-size: 22px;
+  font-weight: 600;
   color: #5b3a50;
 }
 
@@ -297,62 +349,82 @@ button {
   background: transparent;
   color: #7d5a6e;
   font-size: 11px;
-  font-weight: 500;
+  font-weight: 600;
   letter-spacing: .3px;
+  padding: 6px 2px;
+}
+
+.see-all:active {
+  opacity: .6;
 }
 
 .category-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 10px;
+  gap: 11px;
 }
 
 .category-card {
   border: 1px solid #d5e3d1;
-  background: #fff;
-  border-radius: 18px;
+  background: linear-gradient(160deg, #ffffff 0%, #f7fbf6 100%);
+  border-radius: 20px;
   padding: 16px 13px;
   display: flex;
   align-items: center;
-  gap: 11px;
+  gap: 12px;
   text-align: left;
-  min-height: 76px;
+  min-height: 80px;
   transition: .2s;
-  box-shadow: 0 3px 14px #5b3a5006;
+  box-shadow: 0 4px 16px #5b3a5008;
+  position: relative;
+  overflow: hidden;
+}
+
+.category-card::after {
+  content: "";
+  position: absolute;
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  background: #a8c4a022;
+  top: -28px;
+  right: -22px;
+  pointer-events: none;
 }
 
 .category-card:active {
-  transform: scale(.97);
-  background: #f3f8f2;
+  transform: scale(.96);
+  box-shadow: 0 2px 8px #5b3a500a;
 }
 
 .category-icon {
-  width: 40px;
-  height: 40px;
+  width: 44px;
+  height: 44px;
   flex-shrink: 0;
-  border-radius: 50%;
-  background: #e3efe0;
+  border-radius: 16px;
+  background: linear-gradient(145deg, #e3efe0, #d9e8d5);
   display: grid;
   place-items: center;
-  font-size: 18px;
-  color: #7d5a6e;
+  font-size: 19px;
+  color: #5b3a50;
+  box-shadow: inset 0 1px 0 #ffffff80;
 }
 
 .category-card:nth-child(2) .category-icon {
-  background: #d9e8d5;
+  background: linear-gradient(145deg, #efe6ec, #e5d9e1);
 }
 
 .category-card:nth-child(3) .category-icon {
-  background: #d9e8d5;
+  background: linear-gradient(145deg, #e9f0e4, #dcead6);
 }
 
 .category-card:nth-child(4) .category-icon {
-  background: #d9e8d5;
+  background: linear-gradient(145deg, #f0ebe4, #e8dfd5);
 }
 
 .category-name {
-  font-size: 12px;
-  font-weight: 500;
+  font-size: 12.5px;
+  font-weight: 600;
   line-height: 1.5;
   color: #5b3a50;
 }
@@ -361,22 +433,28 @@ button {
   font-size: 10px;
   color: #9a8296;
   margin-top: 3px;
+  font-weight: 300;
 }
 
-/* NAVIGASI BAWAH */
+/* NAVIGASI BAWAH — floating */
 .bottom-nav {
   position: absolute;
   z-index: 10;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  height: 68px;
-  padding: 9px 8px 12px;
-  background: #fff;
-  border-top: 1px solid #d5e3d1;
+  bottom: 12px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: calc(100% - 32px);
+  max-width: 408px;
+  height: 64px;
+  padding: 6px;
+  background: #ffffffee;
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid #d5e3d1;
+  border-radius: 24px;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  border-radius: 0 0 32px 32px;
+  box-shadow: 0 10px 30px #5b3a501a, 0 1px 0 #ffffffcc inset;
 }
 
 .nav-item {
@@ -387,27 +465,26 @@ button {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 5px;
-  font-size: 10px;
+  gap: 3px;
+  font-size: 9.5px;
+  font-weight: 500;
+  border-radius: 18px;
+  transition: .18s;
 }
 
 .nav-icon {
-  font-size: 20px;
+  font-size: 19px;
   line-height: 1;
 }
 
 .nav-item.active {
-  color: var(--green);
+  color: #5b3a50;
   font-weight: 600;
+  background: linear-gradient(145deg, #e3efe0, #efe6ec);
 }
 
 .nav-item.active .nav-icon {
-  background: #e3efe0;
-  width: 37px;
-  height: 29px;
-  display: grid;
-  place-items: center;
-  border-radius: 13px;
+  transform: translateY(-1px);
 }
 
 .notice {
@@ -432,6 +509,25 @@ button {
   opacity: 1;
   transform: translate(-50%, 0);
 }
+
+/* Animasi */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(14px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.topbar,
+.greeting,
+.daily-card,
+.section,
+.prayer,
+.tasbih-card {
+  animation: fadeUp .55s cubic-bezier(.22, 1, .36, 1) both;
+}
+
+.greeting { animation-delay: .05s; }
+.daily-card { animation-delay: .12s; }
+.section { animation-delay: .2s; }
 
 
 @media (min-width: 600px) {
@@ -458,10 +554,11 @@ button {
 
   .bottom-nav {
     position: sticky;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    border-radius: 0 0 32px 32px;
+    bottom: 12px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: calc(100% - 32px);
+    margin: 0 auto;
   }
 }
 
@@ -474,19 +571,31 @@ button {
 }
 
 .prayer {
-  background: #fff;
+  background: linear-gradient(165deg, #ffffff 0%, #f8fbf7 100%);
   border: 1px solid #d5e3d1;
-  border-radius: 20px;
-  padding: 20px 18px;
+  border-radius: 22px;
+  padding: 22px 18px 18px;
   margin-bottom: 14px;
-  box-shadow: 0 3px 14px #5b3a5006;
+  box-shadow: 0 4px 18px #5b3a5008;
   transition: .2s;
   position: relative;
+  overflow: hidden;
+}
+
+.prayer::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 3px;
+  background: linear-gradient(180deg, #a8c4a0, #7d5a6e);
+  opacity: .55;
 }
 
 .prayer:active {
-  transform: scale(.98);
-  background: #f3f8f2;
+  transform: scale(.985);
+  box-shadow: 0 2px 10px #5b3a500a;
 }
 
 .prayer-top {
@@ -496,23 +605,24 @@ button {
 }
 
 .number {
-  width: 36px;
-  height: 36px;
+  width: 38px;
+  height: 38px;
   flex-shrink: 0;
   display: grid;
   place-items: center;
-  border-radius: 50%;
-  background: #e3efe0;
-  color: #7d5a6e;
-  font-weight: 500;
-  font-size: 13px;
+  border-radius: 14px;
+  background: linear-gradient(145deg, #e3efe0, #efe6ec);
+  color: #5b3a50;
+  font-weight: 600;
+  font-size: 14px;
+  font-family: "Cormorant Garamond", Georgia, serif;
 }
 
 .prayer h3 {
   color: #5b3a50;
-  font-family: Georgia, serif;
-  font-size: 15px;
-  font-weight: 500;
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-size: 18px;
+  font-weight: 600;
   margin-bottom: 5px;
 }
 
@@ -520,69 +630,74 @@ button {
   display: inline-block;
   background: #e3efe0;
   color: #7d5a6e;
-  padding: 5px 10px;
+  padding: 5px 11px;
   border-radius: 20px;
   font-size: 9.5px;
   letter-spacing: .4px;
+  font-weight: 500;
 }
 
 .prayer .arabic {
-  color: #5b3a50;
-  font-size: 28px;
-  line-height: 2.1;
+  font-family: "Amiri", serif;
+  color: #47293d;
+  font-size: 30px;
+  line-height: 2.2;
   margin: 18px 0 10px;
   text-align: center;
 }
 
 .latin {
   color: #8a7290;
-  font-size: 12.5px;
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-size: 15px;
   font-style: italic;
   line-height: 1.7;
   margin-bottom: 14px;
 }
 
 .meaning {
-  background: #e3efe0;
-  border-radius: 14px;
-  padding: 13px;
+  background: linear-gradient(145deg, #f3f8f2, #efe6ec66);
+  border-radius: 16px;
+  padding: 14px;
   color: #7d5a6e;
   font-size: 12px;
-  line-height: 1.7;
+  line-height: 1.75;
+  border: 1px solid #d5e3d180;
 }
 
 .meaning strong {
   display: block;
-  color: #7d5a6e;
-  font-size: 10px;
-  letter-spacing: 1px;
+  color: #5b3a50;
+  font-size: 9px;
+  letter-spacing: 1.4px;
   text-transform: uppercase;
-  margin-bottom: 5px;
+  margin-bottom: 6px;
 }
 
 .speak-btn {
   position: absolute;
   top: 14px;
   right: 14px;
-  width: 36px;
-  height: 36px;
+  width: 38px;
+  height: 38px;
   border-radius: 50%;
   border: 1px solid #d5e3d1;
-  background: #e3efe0;
+  background: #fff;
   color: #7d5a6e;
   font-size: 15px;
   display: grid;
   place-items: center;
-  transition: .15s;
+  transition: .18s;
+  box-shadow: 0 2px 8px #5b3a500a;
 }
 
 .speak-btn:active {
-  transform: scale(.9);
+  transform: scale(.88);
 }
 
 .speak-btn.speaking {
-  background: var(--green);
-  border-color: var(--green);
+  background: linear-gradient(145deg, #5b3a50, #7d5a6e);
+  border-color: transparent;
   color: #fff;
   animation: pulse 1s infinite;
 }
@@ -662,11 +777,11 @@ button {
 
   .bottom-nav {
     position: sticky;
-    bottom: 0;
-    left: 0;
-    height: 76px;
-    padding-bottom: 12px;
-    border-radius: 0 0 32px 32px;
+    bottom: 12px;
+    left: 50%;
+    transform: translateX(-50%);
+    height: 64px;
+    margin: 0 auto 8px;
   }
 }
 
@@ -698,12 +813,12 @@ button {
 
   .bottom-nav {
     position: sticky;
-    bottom: 0;
+    bottom: 12px;
     left: 50%;
     transform: translateX(-50%);
-    width: 100%;
-    max-width: 440px;
-    padding-bottom: max(15px, env(safe-area-inset-bottom));
+    width: calc(100% - 32px);
+    max-width: 408px;
+    margin: 0 auto;
   }
 }
 
@@ -735,15 +850,16 @@ button {
   .app > .bottom-nav {
     position: absolute;
     z-index: 50;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    width: 100%;
-    height: 68px;
+    bottom: 12px;
+    left: 50%;
+    right: auto;
+    width: calc(100% - 32px);
+    max-width: 408px;
+    height: 64px;
     margin: 0;
-    transform: none;
+    transform: translateX(-50%);
     flex-shrink: 0;
-}
+  }
 
   .topbar {
     flex-shrink: 0;
