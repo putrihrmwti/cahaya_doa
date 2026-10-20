@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#f8f8f1">
+<meta name="theme-color" content="#eef4ec">
 <title>Cahaya Doa</title>
 
 <style>
@@ -14,17 +14,17 @@
 }
 
 :root {
-  --green:#8b6b55;
-  --dark-green: #634938;
-  --olive: #a58468;
-  --cream: #fbf6ef;
-  --gold: #d8b77a;
-  --text: #40332d;
-  --muted: #9a887c;
+  --green:#5b3a50;
+  --dark-green: #47293d;
+  --olive: #7d5a6e;
+  --cream: #eef4ec;
+  --gold: #a8c4a0;
+  --text: #5b3a50;
+  --muted: #9a8296;
 }
 
 body {
-  background: #eee5da;
+  background: #d8e5d4;
   color: var(--text);
   font-family: "Segoe UI", Arial, sans-serif;
   min-height: 100vh;
@@ -45,11 +45,11 @@ button {
   position: relative;
   padding-bottom: 95px;
   overflow: hidden;
-  box-shadow: 0 0 40px #26392b0c;
+  box-shadow: 0 0 40px #5b3a500c;
 }
 
 .topbar {
-  padding: 24px 22px 16px;
+  padding: 28px 24px 8px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -58,64 +58,67 @@ button {
 .brand {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 11px;
 }
 
 .logo {
-  width: 42px;
-  height: 42px;
-  border-radius: 15px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
   display: grid;
   place-items: center;
-  background: #e7edda;
+  background: #fff;
+  border: 1px solid #d5e3d1;
   color: var(--green);
-  font-size: 25px;
+  font-size: 21px;
 }
 
 .brand-name {
   font-family: Georgia, serif;
-  font-size: 19px;
-  font-weight: bold;
-  letter-spacing: -.5px;
+  font-size: 18px;
+  font-weight: 500;
+  letter-spacing: -.3px;
+  color: #5b3a50;
 }
 
 .brand-subtitle {
   color: var(--muted);
-  font-size: 10px;
-  margin-top: 3px;
-  letter-spacing: 1.2px;
+  font-size: 9px;
+  margin-top: 2px;
+  letter-spacing: 2px;
 }
 
 .profile {
-  width: 42px;
-  height: 42px;
+  width: 40px;
+  height: 40px;
   border-radius: 50%;
   display: grid;
   place-items: center;
-  background: #e8eddf;
-  border: 1px solid #d9e0d0;
+  background: #fff;
+  border: 1px solid #d5e3d1;
   color: var(--green);
-  font-size: 20px;
+  font-size: 18px;
 }
 
 .greeting {
-  padding: 9px 23px 19px;
+  padding: 14px 24px 22px;
 }
 
 .date {
-  font-size: 11px;
-  letter-spacing: 1.5px;
-  color: #829077;
+  font-size: 10px;
+  letter-spacing: 2px;
+  color: #9a8296;
   text-transform: uppercase;
-  margin-bottom: 9px;
+  margin-bottom: 10px;
 }
 
 .greeting h1 {
   font-family: Georgia, serif;
-  font-size: 27px;
-  font-weight: 500;
-  line-height: 1.3;
-  letter-spacing: -.7px;
+  font-size: 26px;
+  font-weight: 400;
+  line-height: 1.35;
+  letter-spacing: -.5px;
+  color: #5b3a50;
 }
 
 .greeting h1 span {
@@ -124,41 +127,44 @@ button {
 }
 
 .greeting p {
-  margin-top: 7px;
-  color: #858e80;
-  font-size: 13px;
+  margin-top: 8px;
+  color: #9a8296;
+  font-size: 12px;
   line-height: 1.6;
 }
 
+/* KARTU DOA HARIAN — minimal kalem */
 .daily-card {
   position: relative;
-  margin: 0 18px 25px;
-  border-radius: 24px;
-  padding: 17px;
-  color: white;
-  background: linear-gradient(145deg, #e5b94b 0%, #cba23f 20%, #71883d 20%, #526e35 100%);
-  overflow: hidden;
-  min-height: 345px;
+  margin: 0 20px 28px;
+  border-radius: 22px;
+  padding: 24px 22px 20px;
+  color: var(--text);
+  background: #fff;
+  border: 1px solid #d5e3d1;
+  box-shadow: 0 6px 24px #5b3a5008;
 }
 
 .daily-card::before {
   content: "";
   position: absolute;
-  width: 200px;
-  height: 200px;
-  border: 1px solid #ffffff20;
-  border-radius: 50%;
-  top: 65px;
-  right: -95px;
+  top: 0;
+  left: 22px;
+  right: 22px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, #c9dccb, transparent);
 }
 
 .daily-card::after {
-  content: "✳";
+  content: "";
   position: absolute;
-  right: 18px;
-  top: 45px;
-  font-size: 95px;
-  color: #ffffff0c;
+  width: 130px;
+  height: 130px;
+  border: 1px solid #5b3a500a;
+  border-radius: 50%;
+  top: -40px;
+  right: -45px;
+  pointer-events: none;
 }
 
 .card-top {
@@ -170,53 +176,56 @@ button {
 }
 
 .card-label {
-  font-size: 10px;
-  letter-spacing: 1.6px;
-  color: #fff1bc;
+  font-size: 9px;
+  letter-spacing: 2px;
+  color: #9a8296;
   text-transform: uppercase;
 }
 
 .card-date {
-  font-size: 10px;
-  color: #f8f0d7;
-  background: #ffffff19;
-  padding: 7px 10px;
+  font-size: 9px;
+  letter-spacing: .5px;
+  color: #7d5a6e;
+  background: #e3efe0;
+  padding: 6px 11px;
   border-radius: 20px;
 }
 
 .card-heading {
   font-family: Georgia, serif;
-  font-size: 23px;
-  font-weight: 600;
-  margin-top: 22px;
+  font-size: 21px;
+  font-weight: 400;
+  margin-top: 18px;
   position: relative;
   z-index: 1;
   line-height: 1.4;
+  color: #5b3a50;
 }
 
-.arabic {
-  font-size: 29px;
+.daily-card .arabic {
+  font-size: 27px;
   text-align: center;
-  line-height: 2;
-  margin: 15px 0 10px;
+  line-height: 2.1;
+  margin: 18px 0 12px;
   position: relative;
   z-index: 1;
+  color: #5b3a50;
 }
 
 .translation {
   text-align: center;
-  color: #f2f2e4;
-  font-size: 12px;
-  line-height: 1.7;
+  color: #8a7290;
+  font-size: 11.5px;
+  line-height: 1.8;
   position: relative;
   z-index: 1;
-  padding: 0 3px;
+  padding: 0 4px;
 }
 
 .card-divider {
   height: 1px;
-  background: #ffffff30;
-  margin: 19px 0 13px;
+  background: #c9dccb;
+  margin: 20px 0 14px;
   position: relative;
   z-index: 1;
 }
@@ -231,7 +240,8 @@ button {
 
 .source {
   font-size: 10px;
-  color: #e7e9d8;
+  letter-spacing: 1px;
+  color: #9a8296;
 }
 
 .card-actions {
@@ -244,102 +254,113 @@ button {
   width: 34px;
   height: 34px;
   border-radius: 50%;
-  border: 1px solid #ffffff55;
-  background: #ffffff17;
-  color: white;
+  border: 1px solid #d5e3d1;
+  background: #e3efe0;
+  color: var(--green);
   display: grid;
   place-items: center;
-  font-size: 15px;
+  font-size: 14px;
+  transition: .15s;
+}
+
+.action:active {
+  transform: scale(.9);
 }
 
 .action.favorite.active {
-  background: #fff;
-  color: #496b37;
+  background: var(--green);
+  border-color: var(--green);
+  color: #fff;
 }
 
 .section {
-  padding: 0 21px;
-  margin-bottom: 25px;
+  padding: 0 22px;
+  margin-bottom: 28px;
 }
 
 .section-heading {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 15px;
+  margin-bottom: 14px;
 }
 
 .section-heading h2 {
   font-family: Georgia, serif;
-  font-size: 20px;
-  font-weight: 500;
+  font-size: 18px;
+  font-weight: 400;
+  color: #5b3a50;
 }
 
 .see-all {
   border: 0;
   background: transparent;
-  color: #748746;
+  color: #7d5a6e;
   font-size: 11px;
-  font-weight: 600;
+  font-weight: 500;
+  letter-spacing: .3px;
 }
 
 .category-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 11px;
+  gap: 10px;
 }
 
 .category-card {
-  border: 1px solid #e6e8dc;
+  border: 1px solid #d5e3d1;
   background: #fff;
-  border-radius: 17px;
-  padding: 14px 12px;
+  border-radius: 18px;
+  padding: 16px 13px;
   display: flex;
   align-items: center;
   gap: 11px;
   text-align: left;
-  min-height: 80px;
+  min-height: 76px;
   transition: .2s;
+  box-shadow: 0 3px 14px #5b3a5006;
 }
 
 .category-card:active {
   transform: scale(.97);
-  background: #f0f3e7;
+  background: #f3f8f2;
 }
 
 .category-icon {
-  width: 42px;
-  height: 42px;
+  width: 40px;
+  height: 40px;
   flex-shrink: 0;
-  border-radius: 14px;
-  background: #edf1e4;
+  border-radius: 50%;
+  background: #e3efe0;
   display: grid;
   place-items: center;
-  font-size: 21px;
+  font-size: 18px;
+  color: #7d5a6e;
 }
 
 .category-card:nth-child(2) .category-icon {
-  background: #f7edda;
+  background: #d9e8d5;
 }
 
 .category-card:nth-child(3) .category-icon {
-  background: #e5eee8;
+  background: #d9e8d5;
 }
 
 .category-card:nth-child(4) .category-icon {
-  background: #f1e8dc;
+  background: #d9e8d5;
 }
 
 .category-name {
   font-size: 12px;
-  font-weight: 650;
+  font-weight: 500;
   line-height: 1.5;
+  color: #5b3a50;
 }
 
 .category-count {
   font-size: 10px;
-  color: #92998c;
-  margin-top: 4px;
+  color: #9a8296;
+  margin-top: 3px;
 }
 
 /* NAVIGASI BAWAH */
@@ -352,7 +373,7 @@ button {
   height: 68px;
   padding: 9px 8px 12px;
   background: #fff;
-  border-top: 1px solid #eceee5;
+  border-top: 1px solid #d5e3d1;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   border-radius: 0 0 32px 32px;
@@ -361,7 +382,7 @@ button {
 .nav-item {
   border: 0;
   background: transparent;
-  color: #a0a79a;
+  color: #b3a3ba;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -377,11 +398,11 @@ button {
 
 .nav-item.active {
   color: var(--green);
-  font-weight: 650;
+  font-weight: 600;
 }
 
 .nav-item.active .nav-icon {
-  background: #e9efdf;
+  background: #e3efe0;
   width: 37px;
   height: 29px;
   display: grid;
@@ -394,7 +415,7 @@ button {
   left: 50%;
   bottom: 90px;
   transform: translate(-50%, 10px);
-  background: #263f2d;
+  background: #5b3a50;
   color: white;
   padding: 12px 18px;
   border-radius: 12px;
@@ -445,20 +466,27 @@ button {
 }
 
 /* KARTU DOA */
+.arabic {
+  font-size: 29px;
+  text-align: center;
+  line-height: 2;
+  margin: 15px 0 10px;
+}
+
 .prayer {
   background: #fff;
-  border: 1px solid #e6e8dc;
-  border-radius: 18px;
-  padding: 18px;
-  margin-bottom: 16px;
-  box-shadow: 0 4px 14px #26392b08;
+  border: 1px solid #d5e3d1;
+  border-radius: 20px;
+  padding: 20px 18px;
+  margin-bottom: 14px;
+  box-shadow: 0 3px 14px #5b3a5006;
   transition: .2s;
   position: relative;
 }
 
 .prayer:active {
   transform: scale(.98);
-  background: #f5f7ef;
+  background: #f3f8f2;
 }
 
 .prayer-top {
@@ -468,60 +496,68 @@ button {
 }
 
 .number {
-  width: 38px;
-  height: 38px;
+  width: 36px;
+  height: 36px;
   flex-shrink: 0;
   display: grid;
   place-items: center;
-  border-radius: 13px;
-  background: #edf1e4;
-  color: #315b40;
-  font-weight: bold;
+  border-radius: 50%;
+  background: #e3efe0;
+  color: #7d5a6e;
+  font-weight: 500;
+  font-size: 13px;
 }
 
 .prayer h3 {
-  color: #26392b;
+  color: #5b3a50;
+  font-family: Georgia, serif;
   font-size: 15px;
+  font-weight: 500;
   margin-bottom: 5px;
 }
 
 .tag {
   display: inline-block;
-  background: #f5f0df;
-  color: #788b3c;
-  padding: 5px 9px;
+  background: #e3efe0;
+  color: #7d5a6e;
+  padding: 5px 10px;
   border-radius: 20px;
-  font-size: 10px;
+  font-size: 9.5px;
+  letter-spacing: .4px;
 }
 
 .prayer .arabic {
-  color: #23452f;
-  font-size: 30px;
-  line-height: 2;
+  color: #5b3a50;
+  font-size: 28px;
+  line-height: 2.1;
   margin: 18px 0 10px;
   text-align: center;
 }
 
 .latin {
-  color: #64705e;
-  font-size: 13px;
+  color: #8a7290;
+  font-size: 12.5px;
+  font-style: italic;
   line-height: 1.7;
   margin-bottom: 14px;
 }
 
 .meaning {
-  background: #f7f8f1;
-  border-radius: 12px;
-  padding: 12px;
-  color: #596453;
+  background: #e3efe0;
+  border-radius: 14px;
+  padding: 13px;
+  color: #7d5a6e;
   font-size: 12px;
   line-height: 1.7;
 }
 
 .meaning strong {
   display: block;
-  color: #315b40;
-  margin-bottom: 4px;
+  color: #7d5a6e;
+  font-size: 10px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin-bottom: 5px;
 }
 
 .speak-btn {
@@ -531,10 +567,10 @@ button {
   width: 36px;
   height: 36px;
   border-radius: 50%;
-  border: 1px solid #dfe4d6;
-  background: #edf1e4;
-  color: #496b37;
-  font-size: 16px;
+  border: 1px solid #d5e3d1;
+  background: #e3efe0;
+  color: #7d5a6e;
+  font-size: 15px;
   display: grid;
   place-items: center;
   transition: .15s;
@@ -545,14 +581,15 @@ button {
 }
 
 .speak-btn.speaking {
-  background: #496b37;
+  background: var(--green);
+  border-color: var(--green);
   color: #fff;
   animation: pulse 1s infinite;
 }
 
 @keyframes pulse {
-  0%, 100% { box-shadow: 0 0 0 0 #496b3755; }
-  50% { box-shadow: 0 0 0 7px #496b3700; }
+  0%, 100% { box-shadow: 0 0 0 0 #5b3a5044; }
+  50% { box-shadow: 0 0 0 7px #5b3a5000; }
 }
 
 
@@ -564,7 +601,7 @@ button {
     display: flex;
     align-items: center;
     justify-content: center;
-    background: #e3e7dc;
+    background: #d8e5d4;
   }
 
   .app {
@@ -578,7 +615,7 @@ button {
     overflow-x: hidden;
     overflow-y: auto;
     position: relative;
-    box-shadow: 0 0 0 2px #aeb2a7, 0 20px 45px #26392b25;
+    box-shadow: 0 0 0 2px #c9dccb, 0 20px 45px #5b3a5025;
     scrollbar-width: none;
   }
 
@@ -891,15 +928,8 @@ function showNotice(message) {
   }, 2200);
 }
 
-// Tanggal hari ini
-const now = new Date();
-document.getElementById("today").textContent =
-  "ASSALAMUALAIKUM • " +
-  new Intl.DateTimeFormat("id-ID", {
-    day: "numeric",
-    month: "long",
-    year: "numeric"
-  }).format(now);
+// Sapaan
+document.getElementById("today").textContent = "ASSALAMUALAIKUM";
 
 // Favorit
 const favoriteButton = document.getElementById("favoriteButton");
@@ -1373,8 +1403,8 @@ function openProfil() {
                 overflow-x: hidden;
                 margin: auto;
                 padding: 25px 20px 100px;
-                background: #fffaf7;
-                color: #493b35;
+                background: #eef4ec;
+                color: #5b3a50;
                 font-family: Arial, sans-serif;
             }
 
@@ -1387,7 +1417,7 @@ function openProfil() {
 
             .profil-header button {
                 border: none;
-                background: #f3e6df;
+                background: #d9e8d5;
                 padding: 10px 14px;
                 border-radius: 12px;
                 cursor: pointer;
@@ -1397,14 +1427,14 @@ function openProfil() {
                 text-align: center;
                 padding: 28px 20px;
                 border-radius: 24px;
-                background: #f5e8e0;
+                background: #e3efe0;
             }
 
             .profil-avatar {
                 width: 85px;
                 height: 85px;
                 border-radius: 50%;
-                background: #fffaf7;
+                background: #f3f8f2;
                 display: grid;
                 place-items: center;
                 font-size: 38px;
@@ -1416,7 +1446,7 @@ function openProfil() {
             }
 
             .profil-card p {
-                color: #806d63;
+                color: #8a7290;
                 font-size: 14px;
             }
 
@@ -1439,10 +1469,10 @@ function openProfil() {
                 box-sizing: border-box;
                 width: 100%;
                 padding: 12px;
-                border: 1px solid #e8d9d0;
+                border: 1px solid #d5e3d1;
                 border-radius: 12px;
                 font: inherit;
-                background: #fffdfb;
+                background: #f3f8f2;
             }
 
             .profil-form textarea {
@@ -1456,7 +1486,7 @@ function openProfil() {
                 padding: 14px;
                 border: none;
                 border-radius: 14px;
-                background: #947568;
+                background: #5b3a50;
                 color: white;
                 font-weight: bold;
                 cursor: pointer;
@@ -1625,7 +1655,7 @@ function openExplore() {
     <main class="page-content">
     <header class="topbar">
       <button id="backHome" aria-label="Kembali ke Home"
-        style="border:0;background:none;font-size:25px;color:#315b40">←</button>
+        style="border:0;background:none;font-size:25px;color:#5b3a50">←</button>
       <div class="brand-name">Jelajahi Doa</div>
       <div style="width:35px"></div>
     </header>
@@ -1638,7 +1668,7 @@ function openExplore() {
 
     <section class="section">
       <input id="exploreSearch" placeholder="Cari nama doa..."
-        style="width:100%;padding:15px;border:1px solid #e1e5d9;border-radius:14px;margin-bottom:20px;font-size:14px">
+        style="width:100%;padding:15px;border:1px solid #d5e3d1;border-radius:14px;margin-bottom:20px;font-size:14px">
       <div id="exploreList"></div>
       <p id="noResults" style="display:none;text-align:center;padding:20px;color:#888">
         Doa tidak ditemukan.
@@ -1664,7 +1694,7 @@ function openZikir() {
     <style>
       .tasbih-card {
         background: white;
-        border: 1px solid #eadfd5;
+        border: 1px solid #d5e3d1;
         border-radius: 22px;
         padding: 22px 16px;
         text-align: center;
@@ -1680,27 +1710,27 @@ function openZikir() {
 
       .target-buttons button {
         padding: 10px 18px;
-        border: 1px solid #d9c7b8;
+        border: 1px solid #a8c4a0;
         border-radius: 12px;
-        background: #fffaf5;
-        color: #634938;
+        background: #f3f8f2;
+        color: #47293d;
       }
 
       .target-buttons button.active {
-        background: #8b6b55;
+        background: #5b3a50;
         color: white;
       }
 
       .counter {
         font-size: 56px;
         font-weight: bold;
-        color: #634938;
+        color: #47293d;
         margin: 12px 0;
       }
 
       .progress-bg {
         height: 9px;
-        background: #eee5da;
+        background: #d8e5d4;
         border-radius: 20px;
         overflow: hidden;
         margin: 14px 0;
@@ -1709,31 +1739,31 @@ function openZikir() {
       .progress-fill {
         height: 100%;
         width: 0%;
-        background: #8b6b55;
+        background: #5b3a50;
         transition: width .2s;
       }
 
       .tap-button {
         width: 135px;
         height: 135px;
-        border: 8px solid #e8d9c9;
+        border: 8px solid #c9dccb;
         border-radius: 50%;
-        background: #8b6b55;
+        background: #5b3a50;
         color: white;
         font-size: 20px;
         font-weight: bold;
         margin: 15px 0;
-        box-shadow: 0 5px 0 #634938;
+        box-shadow: 0 5px 0 #47293d;
       }
 
       .reset-button {
         display: block;
         margin: 10px auto 0;
         padding: 10px 16px;
-        border: 1px solid #d9c7b8;
+        border: 1px solid #a8c4a0;
         border-radius: 12px;
         background: white;
-        color: #634938;
+        color: #47293d;
       }
     </style>
 
@@ -1773,7 +1803,7 @@ function openZikir() {
             <button data-target="100">100</button>
           </div>
 
-          <p style="font-size:12px;color:#9a887c">
+          <p style="font-size:12px;color:#9a8296">
             Jumlah hitungan
           </p>
 
@@ -1797,7 +1827,7 @@ function openZikir() {
           </button>
         </div>
 
-        <p style="text-align:center;color:#9a887c;font-size:12px">
+        <p style="text-align:center;color:#9a8296;font-size:12px">
           Semoga setiap zikir membawa ketenangan hati.
         </p>
       </section>
