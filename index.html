@@ -453,6 +453,7 @@ button {
   margin-bottom: 16px;
   box-shadow: 0 4px 14px #26392b08;
   transition: .2s;
+  position: relative;
 }
 
 .prayer:active {
@@ -521,6 +522,37 @@ button {
   display: block;
   color: #315b40;
   margin-bottom: 4px;
+}
+
+.speak-btn {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 1px solid #dfe4d6;
+  background: #edf1e4;
+  color: #496b37;
+  font-size: 16px;
+  display: grid;
+  place-items: center;
+  transition: .15s;
+}
+
+.speak-btn:active {
+  transform: scale(.9);
+}
+
+.speak-btn.speaking {
+  background: #496b37;
+  color: #fff;
+  animation: pulse 1s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { box-shadow: 0 0 0 0 #496b3755; }
+  50% { box-shadow: 0 0 0 7px #496b3700; }
 }
 
 
@@ -906,25 +938,138 @@ playButton.addEventListener("click", () => {
     return;
   }
   if (window.speechSynthesis.speaking) {
-    window.speechSynthesis.cancel();
-    resetPlayButton();
+    stopSpeech();
     showNotice("Bacaan dihentikan");
     return;
   }
 
+  const arabicText = (document.querySelector(".daily-card .arabic")?.textContent || "").trim();
   const translation = document.querySelector(".daily-card .translation");
-  const text = (translation.innerText || translation.textContent).trim();
-  const utterance = new SpeechSynthesisUtterance(text);
-  utterance.lang = "id-ID";
-  utterance.rate = 0.85;
-  utterance.onend = resetPlayButton;
-  utterance.onerror = resetPlayButton;
-  window.speechSynthesis.speak(utterance);
+  const meaningText = (translation.innerText || translation.textContent).trim();
+
+  speechToken++;
+  const token = speechToken;
+
+  const playMeaning = () => {
+    if (token !== speechToken) return;
+    const utterance = new SpeechSynthesisUtterance(meaningText);
+    utterance.lang = "id-ID";
+    utterance.rate = 0.85;
+    utterance.onend = resetPlayButton;
+    utterance.onerror = resetPlayButton;
+    window.speechSynthesis.speak(utterance);
+  };
+
+  const arabic = new SpeechSynthesisUtterance(arabicText);
+  arabic.lang = "ar-SA";
+  arabic.rate = 0.8;
+  arabic.onend = playMeaning;
+  arabic.onerror = playMeaning;
+  window.speechSynthesis.speak(arabic);
 
   playButton.textContent = "⏸";
   playButton.setAttribute("aria-label", "Hentikan bacaan");
-  showNotice("Membacakan bacaan dan arti doa");
+  showNotice("Membacakan doa Arab, lalu artinya");
 });
+
+// Suara umum: bacakan teks (arti doa) dengan TTS
+let activeSpeakBtn = null;
+let speechToken = 0;
+
+function resetSpeakBtn() {
+  if (activeSpeakBtn) {
+    activeSpeakBtn.classList.remove("speaking");
+    activeSpeakBtn.textContent = "🔊";
+    activeSpeakBtn = null;
+  }
+}
+
+function stopSpeech() {
+  speechToken++;
+  if ("speechSynthesis" in window) window.speechSynthesis.cancel();
+  resetSpeakBtn();
+  resetPlayButton();
+}
+
+function speakText(text, btn) {
+  if (!("speechSynthesis" in window)) {
+    showNotice("Fitur suara belum tersedia di browser ini");
+    return;
+  }
+
+  if (window.speechSynthesis.speaking) {
+    const sameBtn = activeSpeakBtn === btn;
+    stopSpeech();
+    if (sameBtn) {
+      showNotice("Bacaan dihentikan");
+      return;
+    }
+  }
+
+  speechToken++;
+  const token = speechToken;
+  const utterance = new SpeechSynthesisUtterance(text);
+  utterance.lang = "id-ID";
+  utterance.rate = 0.85;
+  utterance.onend = () => { if (token === speechToken) resetSpeakBtn(); };
+  utterance.onerror = () => { if (token === speechToken) resetSpeakBtn(); };
+  window.speechSynthesis.speak(utterance);
+  resetPlayButton();
+
+  if (btn) {
+    resetSpeakBtn();
+    activeSpeakBtn = btn;
+    btn.classList.add("speaking");
+    btn.textContent = "⏹";
+  }
+  showNotice("Membacakan arti doa");
+}
+
+// Suara doa: Arab dulu, lalu artinya
+function speakPrayer(prayer, btn) {
+  if (!("speechSynthesis" in window)) {
+    showNotice("Fitur suara belum tersedia di browser ini");
+    return;
+  }
+
+  if (window.speechSynthesis.speaking) {
+    const sameBtn = activeSpeakBtn === btn;
+    stopSpeech();
+    if (sameBtn) {
+      showNotice("Bacaan dihentikan");
+      return;
+    }
+  }
+
+  speechToken++;
+  const token = speechToken;
+
+  const playMeaning = () => {
+    if (token !== speechToken) return;
+    const meaning = new SpeechSynthesisUtterance(prayer.meaning);
+    meaning.lang = "id-ID";
+    meaning.rate = 0.85;
+    meaning.onend = () => { if (token === speechToken) resetSpeakBtn(); };
+    meaning.onerror = () => { if (token === speechToken) resetSpeakBtn(); };
+    window.speechSynthesis.speak(meaning);
+  };
+
+  const arabic = new SpeechSynthesisUtterance(prayer.arabic);
+  arabic.lang = "ar-SA";
+  arabic.rate = 0.8;
+  arabic.onend = playMeaning;
+  arabic.onerror = playMeaning;
+  window.speechSynthesis.speak(arabic);
+  resetPlayButton();
+
+  if (btn) {
+    resetSpeakBtn();
+    activeSpeakBtn = btn;
+    btn.classList.add("speaking");
+    btn.textContent = "⏹";
+  }
+  showNotice("Membacakan doa Arab, lalu artinya");
+}
 
 // Bagikan doa
 document.getElementById("shareButton").addEventListener("click", async () => {
@@ -1411,8 +1556,9 @@ function openProfil() {
 function setupNavigation() {
   document.querySelectorAll(".nav-item").forEach(button => {
     button.addEventListener("click", () => {
-      if ("speechSynthesis" in window) window.speechSynthesis.cancel();
+      stopSpeech();
       resetPlayButton();
+      resetSpeakBtn();
 
       const page = button.dataset.page;
       if (page === "Home") {
@@ -1440,6 +1586,7 @@ function renderExplore() {
 
   document.getElementById("exploreList").innerHTML = filtered.map((prayer, index) => `
     <article class="prayer">
+      <button class="speak-btn" data-speak="${explorePrayers.indexOf(prayer)}" aria-label="Bacakan doa">🔊</button>
       <div class="prayer-top">
         <div class="number">${index + 1}</div>
         <div>
@@ -1455,6 +1602,14 @@ function renderExplore() {
 
   document.getElementById("noResults").style.display =
     filtered.length ? "none" : "block";
+
+  document.querySelectorAll("[data-speak]").forEach(btn => {
+    btn.addEventListener("click", event => {
+      event.stopPropagation();
+      const prayer = explorePrayers[Number(btn.dataset.speak)];
+      speakPrayer(prayer, btn);
+    });
+  });
 }
 
 function openExplore() {
